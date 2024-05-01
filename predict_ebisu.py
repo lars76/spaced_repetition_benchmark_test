@@ -16,7 +16,16 @@ for train_filename in ["train.csv"]:#, "train_extra.csv"
         grouped = test_df.groupby("cid")
         for _, rows in grouped:
             model = (2., 2., 24.)
-            for _, row in rows.iterrows():
+            for i, (_, row) in enumerate(rows.iterrows()):
+                if i == 0:
+                    recall = ebisu.predictRecall(model,
+                                                row['elapsedDays_{t-1}'] / 24,
+                                                exact=True)
+                    model = ebisu.updateRecall(model,
+                                               row['ease_{t-1}'] > 1,
+                                               1,
+                                               row['elapsedDays_{t-1}'] / 24)
+
                 recall = ebisu.predictRecall(model,
                                              row['elapsedDays_{t}'] / 24,
                                              exact=True)
