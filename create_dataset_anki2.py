@@ -141,7 +141,7 @@ train_df.to_csv("train.csv", index=False)
 train_df_extra = create_extra_data(train_df)
 train_df_extra.to_csv("train_extra.csv", index=False)
 
-test_df = df.iloc[train_index]
+test_df = df.iloc[test_index]
 test_df.to_csv("test.csv", index=False)
 test_df_extra = create_extra_data(test_df)
 test_df_extra.to_csv("test_extra.csv", index=False)
